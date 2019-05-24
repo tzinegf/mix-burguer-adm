@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "175058783538",
+    "firebase_url": "https://mix-burguer-adm.firebaseio.com",
+    "project_id": "mix-burguer-adm",
+    "storage_bucket": "mix-burguer-adm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:175058783538:android:43f5303b006e10f4",
+        "android_client_info": {
+          "package_name": "br.com.tebbas.mix_burguer_admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "175058783538-ceto3g6sgnl0lkqt8pakgub4mcr030nu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsqobAbK9aUtyQ6DAJD24dTdBJyO941-Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "175058783538-ceto3g6sgnl0lkqt8pakgub4mcr030nu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
