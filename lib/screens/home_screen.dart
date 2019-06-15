@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mix_burguer_admin/tabs/users_tab.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -57,18 +58,20 @@ class _HomeScreenState extends State<HomeScreen> {
         ]
         ),
       ),
-      body: PageView(
-        controller: _controller,
-        onPageChanged: (p){
-          setState(() {
-            _page = p;
-          });
-        },
-        children: <Widget>[
-          Container(color: Colors.red,),
-          Container(color: Colors.green,),
-          Container(color: Colors.yellow,),
-        ],
+      body: SafeArea(
+        child: PageView(
+          controller: _controller,
+          onPageChanged: (p){
+            setState(() {
+              _page = p;
+            });
+          },
+          children: <Widget>[
+            UsersTab(),
+            Container(color: Colors.green,),
+            Container(color: Colors.yellow,),
+          ],
+        ),
       ),
     );
   }
