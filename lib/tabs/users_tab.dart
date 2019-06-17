@@ -23,6 +23,7 @@ class UsersTab extends StatelessWidget {
               ),
               border: InputBorder.none,
             ),
+            onChanged: _userBloc.onChangedSearch,
           ),
         ),
         Expanded(
@@ -42,6 +43,7 @@ class UsersTab extends StatelessWidget {
                   );
                 } else {
                   return ListView.separated(
+
                       itemBuilder: (context, index) {
                         return UserTile(snapshot.data[index]);
                       },
