@@ -13,6 +13,7 @@ class UserBloc extends BlocBase{
   UserBloc(){
     _addUsersListner();
   }
+
   void onChangedSearch(String search){
     if(search.trim().isEmpty){
       _usersController.add(_users.values.toList());
@@ -28,7 +29,7 @@ class UserBloc extends BlocBase{
     });
     return filteredUsers;
   }
-
+  
   void _addUsersListner(){
     _firestore.collection("users").snapshots().listen((snapshot){
       snapshot.documentChanges.forEach((change){
