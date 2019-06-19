@@ -13,7 +13,7 @@ class OrderTile extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 16,vertical: 4),
       child: Card(
         child: ExpansionTile(
-            title: Text("#${order.documentID.substring(order.documentID.length -7,order.documentID.length)} ${states[order.data["status"]]}",style: TextStyle(color: Colors.green)),
+            title: Text("ID:#${order.documentID.substring(order.documentID.length -7,order.documentID.length)}"+"  Status:"+" ${states[order.data["status"]]}",style: TextStyle(color: order.data["status"] != 4 ?Colors.grey:Colors.green)),
           children: <Widget>[
             Padding(
               padding: EdgeInsets.only(left: 16,right: 16,top: 0,bottom: 8),
@@ -22,14 +22,14 @@ class OrderTile extends StatelessWidget {
                 children: <Widget>[
 
 
-                  OrderHeader(),
+                  OrderHeader(order),
                   Column(
                     mainAxisSize: MainAxisSize.min,
                     children: order.data["products"].map<Widget>((p){
                       return ListTile(
-                        title: Text(p["product"]["title"] + "-" + p["product"]["price"].toString()),
-                        subtitle: Text(p["category"] + "-" +p["pid"]),
-                        trailing: Text(p["qtde"].toString(),style: TextStyle(fontSize: 20),),
+                        title: Text(p["product"]["title"]),
+                        subtitle: Text("CAT \n"+p["category"]),
+                        trailing: Text("QT:\n  "+ p["qtde"].toString()),
                         contentPadding: EdgeInsets.zero,
 
                       );
@@ -44,12 +44,16 @@ class OrderTile extends StatelessWidget {
                         child: Text("Excluir"),
                       ),
                       FlatButton(
-                        onPressed: (){},
+                        onPressed: order.data["status"]>1?(){
+                            order.reference.updateData({"status":order.data["status"]-1});
+                          }: null,
                         textColor: Colors.grey[850],
                         child: Text("Regredir"),
                       ),
                       FlatButton(
-                        onPressed: (){},
+                        onPressed:order.data["status"]<4?(){
+                          order.reference.updateData({"status":order.data["status"]+1});
+                        }:null,
                         textColor: Colors.green,
                         child: Text("Avançar"),
                       )

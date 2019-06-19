@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mix_burguer_admin/blocs/login_block.dart';
+import 'package:mix_burguer_admin/blocs/login_bloc.dart';
 import 'package:mix_burguer_admin/widgets/input_field.dart';
 
 import 'home_screen.dart';
