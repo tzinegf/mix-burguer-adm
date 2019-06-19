@@ -16,7 +16,7 @@ UserTile(this.user);
           style: TextStyle(color: Colors.white),
         ),
         subtitle: Text(
-          user["email"],
+          user["phone"],
           style: TextStyle(color: Colors.white),
         ),
         trailing: Column(

@@ -15,18 +15,23 @@ class UserBloc extends BlocBase{
   }
 
   void onChangedSearch(String search){
-    if(search.trim().isEmpty){
+    if(search.isEmpty){
+      print(_usersController.listen((teste){ print(teste.toString());}));
       _usersController.add(_users.values.toList());
     }else{
-      _usersController.add(_filter(search.trim()));
+      _usersController.add(_filter(search));
+
     }
   }
 
   List<Map<String,dynamic>> _filter(String search){
     List<Map<String,dynamic>> filteredUsers = List.from(_users.values.toList());
     filteredUsers.retainWhere((user){
-      return user["name"].toUpperCase.contains(search.toUpperCase());
+
+      return user["name"].toUpperCase().contains(search.toUpperCase());
     });
+    String result =filteredUsers.toString();
+    print(result);
     return filteredUsers;
   }
   

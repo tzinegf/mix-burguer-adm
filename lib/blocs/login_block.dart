@@ -32,7 +32,6 @@ class LoginBloc extends BlocBase with LoginValidators {
 StreamSubscription _streamSubscription;
 
   LoginBloc() {
-
     _streamSubscription = FirebaseAuth.instance.onAuthStateChanged.listen((user) async {
       if (user != null) {
         if (await verifyPrivileges(user)) {
