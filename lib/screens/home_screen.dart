@@ -1,6 +1,8 @@
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
+import 'package:mix_burguer_admin/blocs/order_bloc.dart';
 import 'package:mix_burguer_admin/blocs/user_bloc.dart';
+import 'package:mix_burguer_admin/tabs/orders_tab.dart';
 import 'package:mix_burguer_admin/tabs/users_tab.dart';
 
 
@@ -14,6 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
   PageController _controller;
   int _page = 0;
   UserBloc _userBloc;
+  OrdersBloc _ordersBloc;
 
 
   @override
@@ -21,6 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     _controller = PageController();
     _userBloc = UserBloc();
+    _ordersBloc = OrdersBloc();
   }
   @override
   void dispose() {
@@ -65,18 +69,21 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SafeArea(
         child: BlocProvider<UserBloc>(
           bloc: _userBloc,
-          child: PageView(
-            controller: _controller,
-            onPageChanged: (p){
-              setState(() {
-                _page = p;
-              });
-            },
-            children: <Widget>[
-              UsersTab(),
-              Container(color: Colors.green,),
-              Container(color: Colors.yellow,),
-            ],
+          child: BlocProvider<OrdersBloc>(
+            bloc: _ordersBloc,
+            child: PageView(
+              controller: _controller,
+              onPageChanged: (p){
+                setState(() {
+                  _page = p;
+                });
+              },
+              children: <Widget>[
+                UsersTab(),
+                OrdersTab(),
+                Container(color: Colors.yellow,),
+              ],
+            ),
           ),
         ),
       ),
