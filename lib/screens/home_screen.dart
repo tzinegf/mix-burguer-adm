@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:mix_burguer_admin/blocs/order_bloc.dart';
 import 'package:mix_burguer_admin/blocs/user_bloc.dart';
 import 'package:mix_burguer_admin/tabs/orders_tab.dart';
+import 'package:mix_burguer_admin/tabs/products_tab.dart';
 import 'package:mix_burguer_admin/tabs/users_tab.dart';
-
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -81,12 +82,52 @@ class _HomeScreenState extends State<HomeScreen> {
               children: <Widget>[
                 UsersTab(),
                 OrdersTab(),
-                Container(color: Colors.yellow,),
+                ProductsTab()
               ],
             ),
           ),
         ),
       ),
+      floatingActionButton: _buildFloating(),
     );
+  }
+
+  Widget _buildFloating(){
+    switch(_page){
+      case 0:
+        return null;
+        break;
+      case 1:
+        return SpeedDial(
+          child:Icon(Icons.sort) ,
+          backgroundColor: Colors.red,
+          overlayOpacity: 0.4,
+          overlayColor: Colors.black,
+          children: [
+            SpeedDialChild(
+              child: Icon(Icons.arrow_downward,color: Colors.black),
+              backgroundColor: Colors.yellow,
+              label: "Concluidos Abaixo",
+              labelStyle: TextStyle(fontSize:14,color: Colors.black),
+              onTap: (){
+                _ordersBloc.setOrderCriteria(SortCriteria.READY_LAST);
+              }
+            ),
+            SpeedDialChild(
+                child: Icon(Icons.arrow_upward,color: Colors.black),
+                backgroundColor: Colors.yellow,
+                label: "Concluidos Acima",
+                labelStyle: TextStyle(fontSize:14,color: Colors.black ),
+                onTap: (){
+                  _ordersBloc.setOrderCriteria(SortCriteria.READY_FIRST);
+                }
+            )
+          ],
+
+        );
+
+
+    }
+
   }
 }
