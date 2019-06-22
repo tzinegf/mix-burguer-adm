@@ -105,6 +105,15 @@ class _HomeScreenState extends State<HomeScreen> {
           overlayColor: Colors.black,
           children: [
             SpeedDialChild(
+                child: Icon(Icons.update,color: Colors.black),
+                backgroundColor: Colors.yellow,
+                label: "Por Data",
+                labelStyle: TextStyle(fontSize:14,color: Colors.black),
+                onTap: (){
+                  _ordersBloc.setOrderCriteria(SortCriteria.READY_DATE);
+                }
+            ),
+            SpeedDialChild(
               child: Icon(Icons.arrow_downward,color: Colors.black),
               backgroundColor: Colors.yellow,
               label: "Concluidos Abaixo",

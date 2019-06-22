@@ -47,7 +47,6 @@ class OrderTile extends StatelessWidget {
                     children: order.data["products"].map<Widget>((p){
                       return ListTile(
                         title: Text(p["product"]["title"]),
-                        subtitle: Text("CAT \n"+p["category"]),
                         trailing: Text("QT:\n  "+ p["qtde"].toString()),
                         contentPadding: EdgeInsets.zero,
 
@@ -69,7 +68,7 @@ class OrderTile extends StatelessWidget {
                         onPressed: order.data["status"]>0?(){
                             order.reference.updateData({"status":order.data["status"]-1});
                           }: null,
-                        textColor: Colors.grey[850],
+                        textColor: Colors.yellow,
                         child: Text("Regredir"),
                       ),
                       FlatButton(

@@ -2,7 +2,7 @@ import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rxdart/rxdart.dart';
 
-enum SortCriteria { READY_FIRST, READY_LAST }
+enum SortCriteria { READY_FIRST, READY_LAST,READY_DATE }
 
 class OrdersBloc extends BlocBase {
 
@@ -25,12 +25,9 @@ class OrdersBloc extends BlocBase {
     _firestore.collection("orders").snapshots().listen((snapshot) {
       snapshot.documentChanges.forEach((change) {
         String oid = change.document.documentID;
-        int status = change.document.data["status"];
-
         switch (change.type) {
           case DocumentChangeType.added:
             _orders.add(change.document);
-            print(status);
             break;
           case DocumentChangeType.modified:
             _orders.removeWhere((order) => order.documentID == oid);
@@ -69,6 +66,22 @@ class OrdersBloc extends BlocBase {
         _orders.sort((a, b) {
           int sa = a.data["status"];
           int sb = b.data["status"];
+          if (sa > sb) {
+            return 1;
+          } else if (sa < sb) {
+            return -1;
+          } else {
+            return 0;
+          }
+        });
+
+        break;
+      case SortCriteria.READY_DATE:
+        _orders.sort((a, b) {
+          Timestamp saa = a.data["dataOrder"];
+          int sa = saa.seconds;
+          Timestamp sbb = b.data["dataOrder"];
+          int sb = sbb.seconds;
           if (sa > sb) {
             return 1;
           } else if (sa < sb) {
