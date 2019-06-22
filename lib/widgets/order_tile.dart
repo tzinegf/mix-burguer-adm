@@ -32,7 +32,7 @@ class OrderTile extends StatelessWidget {
         child: ExpansionTile(
           key: Key(order.documentID),
             initiallyExpanded: order.data["status"] != 4,
-            title: Text("ID:#${order.documentID.substring(order.documentID.length -7,order.documentID.length)}"+"  Status:"+" ${states[order.data["status"]]}"+"  ${formattedDate}",style: TextStyle(color: order.data["status"] != 4 ?Colors.grey:Colors.green)),
+            title: Text("ID:#${order.documentID.substring(order.documentID.length -7,order.documentID.length)}"+"  Status:"+"${states[order.data["status"]]}"+"\n${formattedDate}",style: TextStyle(color: order.data["status"] != 4 ?Colors.grey:Colors.green)),
           children: <Widget>[
             Padding(
               padding: EdgeInsets.only(left: 16,right: 16,top: 0,bottom: 8),
