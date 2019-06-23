@@ -1,9 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mix_burguer_admin/widgets/category_tile.dart';
-class ProductsTab extends StatelessWidget {
+class ProductsTab extends StatefulWidget {
+  @override
+  _ProductsTabState createState() => _ProductsTabState();
+}
+
+class _ProductsTabState extends State<ProductsTab>  with AutomaticKeepAliveClientMixin{
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return FutureBuilder<QuerySnapshot>(
       future: Firestore.instance.collection("products").getDocuments(),
         builder: (context,snapshot){
@@ -25,4 +31,7 @@ class ProductsTab extends StatelessWidget {
         }
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

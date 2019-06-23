@@ -28,7 +28,7 @@ final _user =_userBloc.getUser(order.data["clientId"]);
         Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
-            Text("Produtos: R\$${order.data["productsPrice"].toStringAsFixed(2)}"),
+            Text("Frete: R\$${order.data["shipPrice"].toStringAsFixed(2)}"),
             Text("Total: R\$${order.data["totalPrice"].toStringAsFixed(2)}"),
 
           ],

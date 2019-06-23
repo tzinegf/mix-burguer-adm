@@ -52,10 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
               _controller.animateToPage(p, duration: Duration(milliseconds:500 ), curve: Curves.ease);
             },
             items: [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              title: Text("Clientes")
-          ),
+
           BottomNavigationBarItem(
               icon: Icon(Icons.shopping_cart),
               title: Text("Pedidos")
@@ -64,6 +61,10 @@ class _HomeScreenState extends State<HomeScreen> {
               icon: Icon(Icons.list),
               title: Text("Produtos")
           ),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.person),
+                  title: Text("Clientes")
+              ),
         ]
         ),
       ),
@@ -80,9 +81,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 });
               },
               children: <Widget>[
-                UsersTab(),
+
                 OrdersTab(),
-                ProductsTab()
+                ProductsTab(),
+                UsersTab(),
               ],
             ),
           ),
@@ -94,10 +96,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildFloating(){
     switch(_page){
-      case 0:
+      case 2:
         return null;
         break;
       case 1:
+        return null;
+        break;
+      case 0:
         return SpeedDial(
           child:Icon(Icons.sort) ,
           backgroundColor: Colors.red,
