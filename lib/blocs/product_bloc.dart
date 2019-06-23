@@ -50,6 +50,9 @@ class ProductBloc extends BlocBase {
   void saveListImages(List images) {
     unsavedData["image"] = images;
   }
+  void deleteProduct(){
+    product.reference.delete();
+  }
 
   Future<bool> saveProduct() async {
     _loadingController.add(true);
