@@ -39,8 +39,6 @@ class OrderTile extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-
-
                   OrderHeader(order),
                   Column(
                     mainAxisSize: MainAxisSize.min,
@@ -52,6 +50,7 @@ class OrderTile extends StatelessWidget {
 
                       );
                     }).toList(),
+
                   ),
                   Row(
                     mainAxisAlignment:MainAxisAlignment.spaceBetween ,

@@ -5,6 +5,7 @@ import 'package:mix_burguer_admin/blocs/user_bloc.dart';
 
 class OrderHeader extends StatelessWidget {
   DocumentSnapshot order;
+  GlobalKey key;
 
   OrderHeader(this.order);
 
@@ -28,9 +29,10 @@ final _user =_userBloc.getUser(order.data["clientId"]);
         Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
-            Text("Frete: R\$${order.data["shipPrice"].toStringAsFixed(2)}"),
+            Text(order.data["payMode"]?"Pagamento: Dinheiro":"Pagamento: Cartão"),
+            Text(order.data["payMode"]?"Valor: R\$${order.data["valoPTroco"].toStringAsFixed(2)}":""),
+            Text(order.data["payMode"]?"Troco: R\$${order.data["troco"].toStringAsFixed(2)}":""),
             Text("Total: R\$${order.data["totalPrice"].toStringAsFixed(2)}"),
-
           ],
         )
       ],
