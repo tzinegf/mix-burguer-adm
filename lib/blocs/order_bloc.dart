@@ -1,7 +1,7 @@
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:assets_audio_player/assets_audio_player.dart';
+//import 'package:assets_audio_player/assets_audio_player.dart';
 
 enum SortCriteria { READY_FIRST, READY_LAST,READY_DATE }
 
@@ -18,7 +18,7 @@ class OrdersBloc extends BlocBase {
 
   SortCriteria _criteria;
 
-  final AssetsAudioPlayer _assetsAudioPlayer = AssetsAudioPlayer();
+  //final AssetsAudioPlayer _assetsAudioPlayer = AssetsAudioPlayer();
 
 
 
@@ -27,10 +27,10 @@ class OrdersBloc extends BlocBase {
   }
 
    playSoundAddOrder(){
-     _assetsAudioPlayer.open(AssetsAudio(
+    /* _assetsAudioPlayer.open(AssetsAudio(
        asset: "bikehorn.mp3",
        folder: "assets/audios/",
-     ));
+     ));*/
   }
 
   void _addOrdersListner() {
