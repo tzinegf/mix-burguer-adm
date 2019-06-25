@@ -31,10 +31,11 @@ dependencies:
   image_picker: ^0.5.3+1
   image_cropper: ^1.0.1
   flutter_speed_dial: ^1.1.1
-  rxdart: ^0.21.0
+  rxdart: ^0.20.0
   bloc_pattern: ^1.5.2
   shimmer: ^1.0.0
   intl: ^0.15.8
+  assets_audio_player: ^1.0.1
 
 dev_dependencies:
   flutter_test:
@@ -55,6 +56,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
   - assets/mix_burguer_admin.png
+  - assets/audios/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

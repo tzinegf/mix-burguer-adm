@@ -52,6 +52,10 @@ class OrderTile extends StatelessWidget {
                     }).toList(),
 
                   ),
+                  Text("Obs:"),
+                  Column(children: <Widget>[
+                    Text(order.data["obs"])
+                  ],),
                   Row(
                     mainAxisAlignment:MainAxisAlignment.spaceBetween ,
                     children: <Widget>[

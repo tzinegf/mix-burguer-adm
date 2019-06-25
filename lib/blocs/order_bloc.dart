@@ -1,6 +1,7 @@
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:assets_audio_player/assets_audio_player.dart';
 
 enum SortCriteria { READY_FIRST, READY_LAST,READY_DATE }
 
@@ -17,8 +18,19 @@ class OrdersBloc extends BlocBase {
 
   SortCriteria _criteria;
 
+  final AssetsAudioPlayer _assetsAudioPlayer = AssetsAudioPlayer();
+
+
+
   OrdersBloc() {
     _addOrdersListner();
+  }
+
+   playSoundAddOrder(){
+     _assetsAudioPlayer.open(AssetsAudio(
+       asset: "bikehorn.mp3",
+       folder: "assets/audios/",
+     ));
   }
 
   void _addOrdersListner() {
@@ -28,6 +40,7 @@ class OrdersBloc extends BlocBase {
         switch (change.type) {
           case DocumentChangeType.added:
             _orders.add(change.document);
+           // _assetsAudioPlayer.play();
             break;
           case DocumentChangeType.modified:
             _orders.removeWhere((order) => order.documentID == oid);
@@ -96,9 +109,6 @@ class OrdersBloc extends BlocBase {
     _ordersController.add(_orders);
   }
 
-  void changeFirstStatus(){
-
-  }
 
   @override
   void dispose() {
