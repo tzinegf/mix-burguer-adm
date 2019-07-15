@@ -2,6 +2,7 @@ import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
 import 'package:mix_burguer_admin/blocs/order_bloc.dart';
 import 'package:mix_burguer_admin/blocs/user_bloc.dart';
+import 'package:mix_burguer_admin/tabs/config_tab.dart';
 import 'package:mix_burguer_admin/tabs/orders_tab.dart';
 import 'package:mix_burguer_admin/tabs/products_tab.dart';
 import 'package:mix_burguer_admin/tabs/users_tab.dart';
@@ -38,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       bottomNavigationBar: Theme(
         data: Theme.of(context).copyWith(
-          canvasColor: Colors.white,
+          canvasColor: Colors.black54,
           primaryColor: Colors.black87,
           accentColor: Colors.red,
           textTheme: Theme.of(context).textTheme.copyWith(
@@ -65,6 +66,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   icon: Icon(Icons.person),
                   title: Text("Clientes")
               ),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.settings),
+                  title: Text("Configurações")
+              ),
         ]
         ),
       ),
@@ -85,6 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 OrdersTab(),
                 ProductsTab(),
                 UsersTab(),
+                ConfigTab(),
               ],
             ),
           ),
