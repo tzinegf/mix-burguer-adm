@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ConfigTab extends StatefulWidget {
 
@@ -8,8 +9,10 @@ class ConfigTab extends StatefulWidget {
 }
 
 class _ConfigTabState extends State<ConfigTab> {
-  String iniTime;
-  String fimTime;
+  String iniTime = "08:00:00";
+  String fimTime = "18:00:00";
+  Firestore _firestore = Firestore.instance;
+  
 
   @override
   Widget build(BuildContext context) {
@@ -72,8 +75,9 @@ class _ConfigTabState extends State<ConfigTab> {
                 onPressed: () {
 
 
-                  DatePicker.showTimePicker(context, onChanged: (date) {
-                    print('confirm $date');
+                  DatePicker.showTimePicker(context, onChanged: (date) async{
+                    //mudar pra função geral
+                    await _firestore.collection('routine').add({'initTime':date});
                     setState(() {
                       iniTime= date.hour.toString()+':'+date.minute.toString()+':'+date.second.toString();
                     });
@@ -94,10 +98,10 @@ class _ConfigTabState extends State<ConfigTab> {
             title: Text("Final"),
             trailing: FlatButton(
                 onPressed: () {
+                  DatePicker.showTimePicker(context, onChanged: (date)async {
 
-
-                  DatePicker.showTimePicker(context, onChanged: (date) {
-                    print('confirm $date');
+                   //mudar pra função geral
+                    await _firestore.collection('routine').add({'fimTime':date});
                     setState(() {
                       fimTime= date.hour.toString()+':'+date.minute.toString()+':'+date.second.toString();
                     });
