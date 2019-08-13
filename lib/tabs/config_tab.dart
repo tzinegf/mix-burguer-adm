@@ -9,8 +9,8 @@ class ConfigTab extends StatefulWidget {
 }
 
 class _ConfigTabState extends State<ConfigTab> {
-  String iniTime = "08:00:00";
-  String fimTime = "18:00:00";
+  String iniTime =  DateFormat('Hms').format(DateTime.now());
+  String fimTime = DateFormat('Hms').format(DateTime.now());
 
   DateTime fimTime1;
   DateTime iniTime1;
@@ -23,7 +23,7 @@ class _ConfigTabState extends State<ConfigTab> {
   bool day5 = false;
   bool day6 = false;
 
-  List daysOfWeek = [];
+  List daysOfWeek = [null, null, null, null, null, null, null];
   Firestore _firestore = Firestore.instance;
 
   @override
@@ -51,9 +51,13 @@ class _ConfigTabState extends State<ConfigTab> {
                     day0 = value;
                   });
                   if (value) {
-                    daysOfWeek.insert(0, 0);
+                    if (daysOfWeek[0] == null) {
+                      daysOfWeek.replaceRange(0, 1, [0]);
+                    } else {
+                      daysOfWeek.replaceRange(0, 1, [null]);
+                    }
                   } else {
-                    daysOfWeek.insert(0, null);
+                    daysOfWeek.replaceRange(0, 1, [null]);
                   }
                 }),
           ),
@@ -66,9 +70,13 @@ class _ConfigTabState extends State<ConfigTab> {
                       day1 = value;
                     });
                     if (value) {
-                      daysOfWeek.insert(1, 1);
+                      if (daysOfWeek[1] == null) {
+                        daysOfWeek.replaceRange(1, 2, [1]);
+                      } else {
+                        daysOfWeek.replaceRange(1, 2, [null]);
+                      }
                     } else {
-                      daysOfWeek.insert(1, null);
+                      daysOfWeek.replaceRange(1, 2, [null]);
                     }
                   })),
           ListTile(
@@ -79,10 +87,15 @@ class _ConfigTabState extends State<ConfigTab> {
                     setState(() {
                       day2 = value;
                     });
+
                     if (value) {
-                      daysOfWeek.insert(2, 2);
+                      if (daysOfWeek[2] == null) {
+                        daysOfWeek.replaceRange(2, 3, [2]);
+                      } else {
+                        daysOfWeek.replaceRange(2, 3, [null]);
+                      }
                     } else {
-                      daysOfWeek.insert(2, null);
+                      daysOfWeek.replaceRange(2, 3, [null]);
                     }
                   })),
           ListTile(
@@ -93,10 +106,15 @@ class _ConfigTabState extends State<ConfigTab> {
                     setState(() {
                       day3 = value;
                     });
+
                     if (value) {
-                      daysOfWeek.insert(3, 3);
+                      if (daysOfWeek[3] == null) {
+                        daysOfWeek.replaceRange(3, 4, [3]);
+                      } else {
+                        daysOfWeek.replaceRange(3, 4, [null]);
+                      }
                     } else {
-                      daysOfWeek.insert(3, null);
+                      daysOfWeek.replaceRange(3, 4, [null]);
                     }
                   })),
           ListTile(
@@ -107,10 +125,15 @@ class _ConfigTabState extends State<ConfigTab> {
                     setState(() {
                       day4 = value;
                     });
+
                     if (value) {
-                      daysOfWeek.insert(4, 4);
+                      if (daysOfWeek[4] == null) {
+                        daysOfWeek.replaceRange(4, 5, [4]);
+                      } else {
+                        daysOfWeek.replaceRange(4, 5, [null]);
+                      }
                     } else {
-                      daysOfWeek.insert(4, null);
+                      daysOfWeek.replaceRange(4, 5, [null]);
                     }
                   })),
           ListTile(
@@ -122,9 +145,13 @@ class _ConfigTabState extends State<ConfigTab> {
                       day5 = value;
                     });
                     if (value) {
-                      daysOfWeek.insert(5, 5);
+                      if (daysOfWeek[5] == null) {
+                        daysOfWeek.replaceRange(5, 6, [5]);
+                      } else {
+                        daysOfWeek.replaceRange(5, 6, [null]);
+                      }
                     } else {
-                      daysOfWeek.insert(5, null);
+                      daysOfWeek.replaceRange(5, 6, [null]);
                     }
                   })),
           ListTile(
@@ -135,10 +162,15 @@ class _ConfigTabState extends State<ConfigTab> {
                     setState(() {
                       day6 = value;
                     });
+
                     if (value) {
-                      daysOfWeek.insert(6, 6);
+                      if (daysOfWeek[6] == null) {
+                        daysOfWeek.replaceRange(6, 7, [6]);
+                      } else {
+                        daysOfWeek.replaceRange(6, 7, [null]);
+                      }
                     } else {
-                      daysOfWeek.insert(6, null);
+                      daysOfWeek.replaceRange(6, 7, [null]);
                     }
                   })),
           Divider(),
@@ -205,11 +237,12 @@ class _ConfigTabState extends State<ConfigTab> {
   }
 
   void setTime(DateTime ti, DateTime tf, List daysOfWeek) async {
-    await _firestore
-        .collection('routine')
-        .add({'fimTime': tf, 'initTime': ti, 'daysOfWeek': daysOfWeek});
-    print(daysOfWeek);
 
-    this.daysOfWeek = [];
+/*
+     DocumentSnapshot snapshot = await _firestore.collection("routine").document("routine").get();
+    print(snapshot.documentID);
+    */
+    await _firestore
+        .collection('routine').document('routineId').setData({'fimTime': tf, 'initTime': ti, 'daysOfWeek': daysOfWeek});
   }
 }
